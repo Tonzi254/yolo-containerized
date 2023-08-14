@@ -4,10 +4,10 @@ RUN mkdir -p /yolo/backend
 
 WORKDIR /yolo/backend
 
-COPY package*.json /app/
+COPY package*.json /yolo/backend/
 
 RUN npm install
 
-COPY . /app/backend
+COPY . /yolo/backend/
 
 CMD [ "npm", "start" ]

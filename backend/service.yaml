@@ -4,12 +4,12 @@ metadata:
   name: yolo-backend-service
 spec:
   selector:
-    app: yolo
+    app: yolo-backend-deployment
     tier: backend
   type: LoadBalancer
   ports:
-  - protocol: "TCP"
-    port: 5000
-    targetPort: 5000
-    nodePort: 50000
+    - protocol: "TCP"
+      port: 5000
+      targetPort: 5000
+      nodePort: 31000
   
