@@ -4,11 +4,11 @@ RUN mkdir -p /yolo/client
 
 WORKDIR /yolo/client
 
-COPY package*.json /app/
+COPY package*.json /yolo/client/
 
 RUN npm install
 
-COPY . /yolo/client
+COPY . /yolo/client/
 
 EXPOSE 3000
 
