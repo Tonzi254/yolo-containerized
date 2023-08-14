@@ -6,8 +6,9 @@ spec:
   selector:
     app: yolo
     tier: frontend
+  type: LoadBalancer
   ports:
   - protocol: "TCP"
     port: 3000
     targetPort: 3000
-  type: LoadBalancer
+    nodePort: 30000

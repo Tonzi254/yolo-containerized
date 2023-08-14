@@ -1,13 +1,13 @@
 FROM node:19.9.0-alpine
 
-RUN mkdir -p /app
+RUN mkdir -p /yolo/backend
 
-WORKDIR /app
+WORKDIR /yolo/backend
 
 COPY package*.json /app/
 
 RUN npm install
 
-COPY . /app/
+COPY . /app/backend
 
 CMD [ "npm", "start" ]
