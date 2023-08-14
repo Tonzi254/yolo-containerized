@@ -16,6 +16,8 @@ services:
       - 5000:5000
     environment:
       MONGODB_URI: 'mongodb://yolo:yolo123@172.20.0.1:27017/'
+    volumes:
+      - ./backend:/app
     depends_on:
       - database
     networks:
@@ -28,6 +30,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: yolo123
     ports:
       - 27017:27017
+    volumes:
+      - yolo-vol:/data/db
     networks:
       yolo-network:
         ipv4_address: 172.20.0.100
@@ -37,3 +41,5 @@ networks:
       driver: default
       config:
         - subnet: 172.20.0.0/16
+volumes:
+  yolo-vol:
