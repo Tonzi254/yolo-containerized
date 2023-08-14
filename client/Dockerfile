@@ -1,14 +1,14 @@
 FROM node:13.12.0-alpine
 
-RUN mkdir -p /app/client
+RUN mkdir -p /yolo/client
 
-WORKDIR /app/client
+WORKDIR /yolo/client
 
 COPY package*.json /app/
 
 RUN npm install
 
-COPY . /app/client
+COPY . /yolo/client
 
 EXPOSE 3000
 
