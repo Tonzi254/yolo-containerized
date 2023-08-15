@@ -15,7 +15,7 @@ Make sure that you have the following installed:
  `cd ./yolo-orchestration/database`
 
 ## Run the following commands to deploy the database container to Kubernetes
- `$ kubectl create -f deployment.yaml && kubectl create -f configMap.yaml && kubectl create -f service.yaml && kubectl create -f mongo-pv.yaml && kubectl create -f mongo-pvc.yaml && kubectl apply -f deployment.yaml`
+ `$ kubectl create -f secret.yaml && kubectl create -f configMap.yaml && kubectl create -f mongo-pv.yaml && kubectl create -f mongo-pvc.yaml && kubectl create -f deployment.yaml && kubectl apply -f deployment.yaml && kubectl create -f service.yaml && kubectl apply -f service.yaml`
 
 ## Navigate to the backend folder containing the backend application 
  `cd ./yolo-orchestration/backend`
