@@ -3,17 +3,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: yolo-backend-deployment
+  labels:
+    app: yolo-backend-k8s
 spec:
   selector:
     matchLabels:
-      app: yolo
+      app: yolo-backend-k8s
       tier: backend
       track: stable
   replicas: 2
   template:
     metadata:
       labels:
-        app: yolo
+        app: yolo-backend-k8s
         tier: backend
         track: stable
     spec:

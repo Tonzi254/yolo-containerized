@@ -10,4 +10,6 @@ RUN npm install
 
 COPY . /yolo/backend/
 
+EXPOSE 5000
+
 CMD [ "npm", "start" ]

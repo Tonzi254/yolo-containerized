@@ -3,33 +3,40 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: yolo-frontend-deployment
+  labels:
+    app: yolo-frontend-k8s
 spec:
   selector:
     matchLabels:
-      app: yolo
+      app: yolo-frontend-k8s
       tier: frontend
       track: stable
   replicas: 2
   template:
     metadata:
       labels:
-        app: yolo
+        app: yolo-frontend-k8s
         tier: frontend
         track: stable
     spec:
       containers:
         - name: yolo-frontend
-          image: "tonzi/yolo-client:1.0.1"
+          image: "tonzi/yolo-client:1.0.2"
+          stdin: true
+          tty: true
           ports:
           - containerPort: 3000
           env:
             - name: PORT
-              value: "3000"
+              valueFrom:
+                configMapKeyRef:
+                  name: yolo-frontend-config
+                  key: PORT
           resources:
             requests:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
     
