@@ -5,5 +5,4 @@ metadata:
   labels:
     app: yolo-database-mongodb-port
 data:
-  PORT: "12017"
-  volumes: "yolo-vol:/data/db"
+  PORT: "27017"

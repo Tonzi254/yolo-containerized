@@ -33,12 +33,12 @@ spec:
             - name: MONGODB_URI
               valueFrom:
                 secretKeyRef:
-                  name: yolo-backend-secret
+                  name: yolo-database-secret
                   key: MONGODB_URI
           resources:
             requests:
               memory: "1Gi"
-              cpu: "500m"
+              cpu: "256m"
             limits:
               memory: "1Gi"
-              cpu: "500m"
+              cpu: "256m"

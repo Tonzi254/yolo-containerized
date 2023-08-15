@@ -1,17 +1,15 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: yolo-database-service
-  labels:
-    app: yolo-database-k8s
-spec:
-  selector:
-    app: yolo-database-deployment
-    tier: database
-  type: LoadBalancer
-  ports:
-    - protocol: "TCP"
-      port: 12017
-      targetPort: 12017
-      nodePort: 31500
-  
+  apiVersion: "v1"
+  kind: Service
+  metadata: 
+    name: yolo-database-k8s
+    labels: 
+      app: yolo-database-k8s
+  spec: 
+    externalTrafficPolicy: Local
+    ports: 
+      - name: "mongodb"
+        port: 27017
+        nodePort: 30332
+    type: "NodePort"
+    selector: 
+      app: "yolo-database-k8s"

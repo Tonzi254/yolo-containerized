@@ -1,16 +1,17 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: yolo-database-deployment
+  name: yolo-database-k8s
   labels:
     app: yolo-database-k8s
 spec:
+  serviceName: yolo-database-k8s
+  replicas: 1
   selector:
     matchLabels:
       app: yolo-database-k8s
       tier: database
-  replicas: 1
   template:
     metadata:
       labels:
@@ -20,6 +21,7 @@ spec:
       containers:
         - name: yolo-database
           image: "mongo"
+          imagePullPolicy: Always
           ports:
           - containerPort: 27017
           env:
@@ -30,23 +32,25 @@ spec:
                   key: PORT
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: yolo-database-secret
                   key: MONGO_INITDB_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: yolo-database-secret
                   key: MONGO_INITDB_ROOT_PASSWORD
-            - name: volumes
-              valueFrom:
-                configMapKeyRef:
-                  name: yolo-database-config
-                  key: volumes
           resources:
             requests:
               memory: "1Gi"
-              cpu: "500m"
+              cpu: "256m"
             limits:
               memory: "1Gi"
-              cpu: "500m"
+              cpu: "256m"
+          volumeMounts:
+          - name: "mongo-data-dir"
+            mountPath: "/data/db"
+      volumes:
+        - name: "mongo-data-dir"
+          persistentVolumeClaim:
+            claimName: "mongodb-pvc"
