@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yolo-database-config
+  labels:
+    app: yolo-database-mongodb-port
+data:
+  PORT: "12017"
+  volumes: "yolo-vol:/data/db"

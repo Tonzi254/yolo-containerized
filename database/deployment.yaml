@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-database-deployment
+  labels:
+    app: yolo-database-k8s
+spec:
+  selector:
+    matchLabels:
+      app: yolo-database-k8s
+      tier: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yolo-database-k8s
+        tier: database
+    spec:
+      containers:
+        - name: yolo-database
+          image: "mongo"
+          ports:
+          - containerPort: 27017
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: yolo-database-config
+                  key: PORT
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: yolo-database-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: yolo-database-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+            - name: volumes
+              valueFrom:
+                configMapKeyRef:
+                  name: yolo-database-config
+                  key: volumes
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
